@@ -5,8 +5,9 @@ import Sort from "../components/Sort";
 import Placeholder from "../components/PizzaBlock/Placeholder";
 import PizzaBlock from "../components/PizzaBlock";
 import Pagination from "../components/Pagination";
+import { SearchContext } from "../App";
 
-const Home = ({ searchValue }) => {
+const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
@@ -15,6 +16,7 @@ const Home = ({ searchValue }) => {
     name: "популярности",
     sortProperty: "rating",
   });
+  const { searchValue } = React.useContext(SearchContext);
 
   const category = categoryId > 0 ? `category=${categoryId}` : "";
   const order = sortType.sortProperty.includes("-") ? "asc" : "desc";
