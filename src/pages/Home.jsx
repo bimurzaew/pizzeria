@@ -5,7 +5,6 @@ import Sort from "../components/Sort";
 import Placeholder from "../components/PizzaBlock/Placeholder";
 import PizzaBlock from "../components/PizzaBlock";
 import Pagination from "../components/Pagination";
-import { SearchContext } from "../App";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -13,19 +12,20 @@ const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const { searchValue } = React.useContext(SearchContext);
-  const { categoryId, sort, pageCount } = useSelector((state) => state.filter);
+  const { categoryId, sort, pageCount, search } = useSelector(
+    (state) => state.filter
+  );
 
   const category = categoryId > 0 ? `category=${categoryId}` : "";
   const order = sort.sortProperty.includes("-") ? "asc" : "desc";
   const sortBy = sort.sortProperty.replace("-", "");
-  const search = searchValue ? `&search=${searchValue}` : "";
+  const searched = search ? `&search=${search}` : "";
 
   React.useEffect(() => {
     setIsLoading(true);
     axios
       .get(
-        `https://62dd52efccdf9f7ec2c4e0b8.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}&page=${pageCount}&limit=4`
+        `https://62dd52efccdf9f7ec2c4e0b8.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${searched}&page=${pageCount}&limit=4`
       )
       .then((res) => {
         setItems(res.data);
@@ -33,7 +33,7 @@ const Home = () => {
       });
 
     window.scrollTo(0, 0);
-  }, [categoryId, sort, searchValue, pageCount]);
+  }, [categoryId, sort, search, pageCount]);
 
   const skeleton = [...new Array(4)].map((_, index) => (
     <Placeholder key={index} />
