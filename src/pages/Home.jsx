@@ -12,10 +12,9 @@ import axios from "axios";
 const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [currentPage, setCurrentPage] = React.useState(1);
 
   const { searchValue } = React.useContext(SearchContext);
-  const { categoryId, sort } = useSelector((state) => state.filter);
+  const { categoryId, sort, pageCount } = useSelector((state) => state.filter);
 
   const category = categoryId > 0 ? `category=${categoryId}` : "";
   const order = sort.sortProperty.includes("-") ? "asc" : "desc";
@@ -26,7 +25,7 @@ const Home = () => {
     setIsLoading(true);
     axios
       .get(
-        `https://62dd52efccdf9f7ec2c4e0b8.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}&page=${currentPage}&limit=4`
+        `https://62dd52efccdf9f7ec2c4e0b8.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}&page=${pageCount}&limit=4`
       )
       .then((res) => {
         setItems(res.data);
@@ -34,7 +33,7 @@ const Home = () => {
       });
 
     window.scrollTo(0, 0);
-  }, [categoryId, sort, searchValue, currentPage]);
+  }, [categoryId, sort, searchValue, pageCount]);
 
   const skeleton = [...new Array(4)].map((_, index) => (
     <Placeholder key={index} />
@@ -49,7 +48,7 @@ const Home = () => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeleton : pizzas}</div>
-      <Pagination onChangePage={(number) => setCurrentPage(number)} />
+      <Pagination />
     </div>
   );
 };
