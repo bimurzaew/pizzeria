@@ -1,6 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../redux/slices/cartSlice";
 
 const CartItem = ({ id, title, price, count, type, imageUrl }) => {
+  const dispatch = useDispatch();
+
+  const handlePlus = () => {
+    dispatch(addItem({ id }));
+  };
+
   return (
     <div className="cart__item">
       <div className="cart__item-img">
@@ -30,7 +38,10 @@ const CartItem = ({ id, title, price, count, type, imageUrl }) => {
           </svg>
         </div>
         <b>{count}</b>
-        <div className="button button--outline button--circle cart__item-count-plus">
+        <div
+          className="button button--outline button--circle cart__item-count-plus"
+          onClick={handlePlus}
+        >
           <svg
             width="10"
             height="10"
