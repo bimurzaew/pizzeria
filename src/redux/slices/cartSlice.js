@@ -29,8 +29,11 @@ const cartSLice = createSlice({
         findItem.count--;
       }
     },
+    removeItem: (state, action) => {
+      state.items = state.items.filter((obj) => obj.id !== action.payload);
+    },
   },
 });
 
-export const { addItem, minusItem } = cartSLice.actions;
+export const { addItem, minusItem, removeItem } = cartSLice.actions;
 export default cartSLice.reducer;
