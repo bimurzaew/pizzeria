@@ -22,8 +22,15 @@ const cartSLice = createSlice({
       }
       state.totalPrice += action.payload.price;
     },
+    minusItem: (state, action) => {
+      const findItem = state.items.find((obj) => obj.id === action.payload);
+
+      if (findItem) {
+        findItem.count--;
+      }
+    },
   },
 });
 
-export const { addItem } = cartSLice.actions;
+export const { addItem, minusItem } = cartSLice.actions;
 export default cartSLice.reducer;
