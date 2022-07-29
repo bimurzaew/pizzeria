@@ -8,6 +8,8 @@ const Cart = () => {
   const { items, totalPrice } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+
   const handleClearCart = () => {
     if (window.confirm("Вы действительно хотите очистить корзину?")) {
       dispatch(clearCart());
@@ -98,12 +100,10 @@ const Cart = () => {
         <div className="cart__bottom">
           <div className="cart__bottom-details">
             <span>
-              {" "}
-              Всего пицц: <b>{items.length} шт.</b>{" "}
+              Всего пицц: <b>{totalCount} шт.</b>
             </span>
             <span>
-              {" "}
-              Сумма заказа: <b>{totalPrice} ₽</b>{" "}
+              Сумма заказа: <b>{totalPrice} ₽</b>
             </span>
           </div>
           <div className="cart__bottom-buttons">

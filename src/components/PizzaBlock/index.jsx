@@ -13,8 +13,6 @@ function PizzaBlock({ price, title, imageUrl, sizes, types, id }) {
   const [activeSize, setActiveSize] = React.useState(0);
   const typeNames = ["тонкое", "традиционное"];
 
-  console.log(activeSize);
-
   const handleAddItem = () => {
     const item = {
       id,
