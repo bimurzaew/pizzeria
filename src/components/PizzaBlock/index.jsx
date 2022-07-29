@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/slices/cartSlice";
-import { type } from "@testing-library/user-event/dist/type";
 
 function PizzaBlock({ price, title, imageUrl, sizes, types, id }) {
   const dispatch = useDispatch();
@@ -13,6 +12,8 @@ function PizzaBlock({ price, title, imageUrl, sizes, types, id }) {
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
   const typeNames = ["тонкое", "традиционное"];
+
+  console.log(activeSize);
 
   const handleAddItem = () => {
     const item = {

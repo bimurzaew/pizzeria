@@ -22,14 +22,8 @@ const cartSLice = createSlice({
       }
       state.totalPrice += action.payload.price;
     },
-    removeItem: (state, action) => {
-      state.items.filter((obj) => obj.id !== action.payload.id);
-    },
-    clearItems: (state) => {
-      state.items = [];
-    },
   },
 });
 
-export const { addItem, removeItem, clearItems } = cartSLice.actions;
+export const { addItem } = cartSLice.actions;
 export default cartSLice.reducer;
