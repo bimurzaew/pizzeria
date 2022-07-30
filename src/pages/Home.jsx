@@ -6,19 +6,18 @@ import Placeholder from "../components/PizzaBlock/Placeholder";
 import PizzaBlock from "../components/PizzaBlock";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
 import { setFilters } from "../redux/slices/filterSlice";
+import { fetchPizzas } from "../redux/slices/pizzaSlice";
 
 const Home = () => {
-  const [items, setItems] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
+  const { status, items } = useSelector((state) => state.pizza);
   const { categoryId, sort, pageCount, search } = useSelector(
     (state) => state.filter
   );
@@ -28,16 +27,16 @@ const Home = () => {
   const sortBy = sort.sortProperty.replace("-", "");
   const searched = search ? `&search=${search}` : "";
 
-  const fetchPizzas = () => {
-    setIsLoading(true);
-    axios
-      .get(
-        `https://62dd52efccdf9f7ec2c4e0b8.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${searched}&page=${pageCount}&limit=4`
-      )
-      .then((res) => {
-        setItems(res.data);
-        setIsLoading(false);
-      });
+  const getPizzas = async () => {
+    dispatch(
+      fetchPizzas({
+        category,
+        sortBy,
+        order,
+        searched,
+        pageCount,
+      })
+    );
   };
 
   React.useEffect(() => {
@@ -58,7 +57,7 @@ const Home = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
     if (!isSearch.current) {
-      fetchPizzas();
+      getPizzas();
     }
     isSearch.current = false;
   }, [categoryId, sort, search, pageCount]);
@@ -87,7 +86,9 @@ const Home = () => {
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">{isLoading ? skeleton : pizzas}</div>
+      <div className="content__items">
+        {status === "loading" ? skeleton : pizzas}
+      </div>
       <Pagination />
     </div>
   );
