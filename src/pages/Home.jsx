@@ -7,7 +7,7 @@ import PizzaBlock from "../components/PizzaBlock";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import qs from "qs";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { filterSelector, setFilters } from "../redux/slices/filterSlice";
 import { fetchPizzas, pizzaDataSelector } from "../redux/slices/pizzaSlice";
 
@@ -75,7 +75,11 @@ const Home = () => {
   const skeleton = [...new Array(4)].map((_, index) => (
     <Placeholder key={index} />
   ));
-  const pizzas = items.map((obj) => <PizzaBlock {...obj} key={obj.id} />);
+  const pizzas = items.map((obj) => (
+    <Link to={`/pizza/${obj.id}`} key={obj.id}>
+      <PizzaBlock {...obj} />
+    </Link>
+  ));
 
   return (
     <div className="container">

@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import NotFoundBlock from "./components/NotFoundBlock";
 import Cart from "./pages/Cart";
 import MainLayout from "./layouts/MainLayout";
+import FullPizza from "./pages/FullPizza";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route element={<Home />} path="" />
         <Route element={<Cart />} path="cart" />
         <Route element={<NotFoundBlock />} path="*" />
+        <Route element={<FullPizza />} path="pizza/:id" />
       </Route>
     </Routes>
   );

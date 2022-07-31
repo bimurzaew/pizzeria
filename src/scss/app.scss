@@ -109,6 +109,30 @@ body {
   width: $container-width;
   margin: 0 auto;
 
+  &__pizza {
+    text-align: center;
+
+    h2 {
+      margin-bottom: 30px;
+    }
+    img {
+      width: 450px;
+    }
+    p {
+      font-size: 22px;
+      margin-bottom: 40px;
+    }
+    span {
+      font-size: 24px;
+    }
+    div {
+      justify-content: center;
+      a {
+        width: 256px!important;
+      }
+    }
+  }
+
   &--cart {
     max-width: 820px;
     margin: 90px auto;
