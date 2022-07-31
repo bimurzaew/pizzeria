@@ -9,11 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
 import { filterSelector, setFilters } from "../redux/slices/filterSlice";
-import {
-  fetchPizzas,
-  pizzaDataSelector,
-  pizzaSelector,
-} from "../redux/slices/pizzaSlice";
+import { fetchPizzas, pizzaDataSelector } from "../redux/slices/pizzaSlice";
 
 const Home = () => {
   const navigate = useNavigate();
