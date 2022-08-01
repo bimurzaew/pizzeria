@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { filterSelector, setFilters } from "../redux/slices/filterSlice";
 import { fetchPizzas, pizzaDataSelector } from "../redux/slices/pizzaSlice";
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = React.useRef(false);
@@ -27,6 +27,7 @@ const Home = () => {
 
   const getPizzas = async () => {
     dispatch(
+      //@ts-ignore
       fetchPizzas({
         category,
         sortBy,
@@ -75,7 +76,7 @@ const Home = () => {
   const skeleton = [...new Array(4)].map((_, index) => (
     <Placeholder key={index} />
   ));
-  const pizzas = items.map((obj) => (
+  const pizzas = items.map((obj: any) => (
     <Link to={`/pizza/${obj.id}`} key={obj.id}>
       <PizzaBlock {...obj} />
     </Link>
