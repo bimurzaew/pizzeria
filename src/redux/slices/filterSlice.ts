@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 type Sort = {
@@ -27,22 +27,31 @@ export const filterSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    setCategoryId: (state, action) => {
+    setCategoryId: (state, action: PayloadAction<number>) => {
       state.categoryId = action.payload;
     },
-    changeSort: (state, action) => {
+    changeSort: (state, action: PayloadAction<Sort>) => {
       state.sort = action.payload;
     },
-    changePageCount: (state, action) => {
+    changePageCount: (state, action: PayloadAction<number>) => {
       state.pageCount = action.payload;
     },
-    changeSearchValue: (state, action) => {
+    changeSearchValue: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
     },
-    setFilters: (state, action) => {
-      state.pageCount = Number(action.payload.pageCount);
-      state.categoryId = Number(action.payload.categoryId);
-      state.sort = action.payload.sort;
+    setFilters: (state, action: PayloadAction<FilterSliceState>) => {
+      if (Object.keys(action.payload).length) {
+        state.pageCount = Number(action.payload.pageCount);
+        state.categoryId = Number(action.payload.categoryId);
+        state.sort = action.payload.sort;
+      } else {
+        state.pageCount = 1;
+        state.categoryId = 0;
+        state.sort = {
+          name: "популярности",
+          sortProperty: "rating",
+        };
+      }
     },
   },
 });

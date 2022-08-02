@@ -25,6 +25,8 @@ const Home: React.FC = () => {
   const sortBy = sort.sortProperty.replace("-", "");
   const searched = search ? `&search=${search}` : "";
 
+  console.log(items);
+
   const getPizzas = async () => {
     dispatch(
       //@ts-ignore
