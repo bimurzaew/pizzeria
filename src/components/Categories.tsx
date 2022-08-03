@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterSelector, setCategoryId } from "../redux/slices/filterSlice";
+import { categorySelector, setCategoryId } from "../redux/slices/filterSlice";
 
 const categories = [
   "Все",
@@ -13,7 +13,7 @@ const categories = [
 
 const Categories: React.FC = () => {
   const dispatch = useDispatch();
-  const { categoryId } = useSelector(filterSelector);
+  const categoryId = useSelector(categorySelector);
 
   const handleActiveCategory = (index: number) => {
     dispatch(setCategoryId(index));
@@ -38,4 +38,4 @@ const Categories: React.FC = () => {
   );
 };
 
-export default Categories;
+export default React.memo(Categories);

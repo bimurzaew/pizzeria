@@ -88,4 +88,4 @@ const Sort: React.FC = () => {
   );
 };
 
-export default Sort;
+export default React.memo(Sort);
