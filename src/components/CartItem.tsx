@@ -54,7 +54,8 @@ const CartItemBlock: React.FC<CartItemProps> = ({
         </p>
       </div>
       <div className="cart__item-count">
-        <div
+        <button
+          disabled={count === 1}
           className="button button--outline button--circle cart__item-count-minus"
           onClick={handleMinus}
         >
@@ -74,9 +75,9 @@ const CartItemBlock: React.FC<CartItemProps> = ({
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
         <b>{count}</b>
-        <div
+        <button
           className="button button--outline button--circle cart__item-count-plus"
           onClick={handlePlus}
         >
@@ -96,7 +97,7 @@ const CartItemBlock: React.FC<CartItemProps> = ({
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
       </div>
       <div className="cart__item-price">
         <b>{price * count} ₽</b>
