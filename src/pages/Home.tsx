@@ -75,11 +75,7 @@ const Home: React.FC = () => {
   const skeleton = [...new Array(4)].map((_, index) => (
     <Placeholder key={index} />
   ));
-  const pizzas = items.map((obj: any) => (
-    <Link to={`/pizza/${obj.id}`} key={obj.id}>
-      <PizzaBlock {...obj} />
-    </Link>
-  ));
+  const pizzas = items.map((obj: any) => <PizzaBlock {...obj} key={obj.id} />);
 
   return (
     <div className="container">
