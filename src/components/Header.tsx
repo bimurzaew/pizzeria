@@ -2,7 +2,7 @@ import logoSvg from "../assets/img/pizza-logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import Search from "./Search";
 import { useSelector } from "react-redux";
-import { cartSelector } from "../redux/slices/cartSlice";
+import { cartSelector } from "../redux/slices/cart/selectors";
 import React, { useEffect, useRef } from "react";
 
 const Header: React.FC = () => {
