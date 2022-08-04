@@ -1,28 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { RootState } from "../store";
-
-type PizzaItem = {
-  category: number;
-  description: string;
-  id: string;
-  imageUrl: string;
-  sizes: number[];
-  title: string;
-  price: number;
-  types: number[];
-};
-
-export enum Status {
-  LOADING = "loading",
-  ERROR = "error",
-  SUCCESS = "success",
-}
-
-interface PizzaSliceState {
-  items: PizzaItem[];
-  status: Status;
-}
+import { RootState } from "../../store";
+import { PizzaItem, PizzaSliceState, Status } from "./types";
 
 const initialState: PizzaSliceState = {
   items: [],
@@ -40,7 +19,7 @@ export const fetchPizzas = createAsyncThunk<
   return data;
 });
 
-const pizzaSlice = createSlice({
+const slice = createSlice({
   name: "pizza",
   initialState,
   reducers: {},
@@ -60,6 +39,4 @@ const pizzaSlice = createSlice({
   },
 });
 
-export const pizzaDataSelector = (state: RootState) => state.pizza;
-
-export default pizzaSlice.reducer;
+export default slice.reducer;
