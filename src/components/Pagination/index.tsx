@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 
 import styles from "./Pagination.module.scss";
 import { useDispatch } from "react-redux";
-import { changePageCount } from "../../redux/slices/filter/slice";
+import { changePageCount } from "../../redux/filter/slice";
 
 const Pagination: React.FC = () => {
   const dispatch = useDispatch();

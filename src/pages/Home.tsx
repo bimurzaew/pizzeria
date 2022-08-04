@@ -8,10 +8,10 @@ import Sort, { list } from "../components/Sort";
 import Placeholder from "../components/PizzaBlock/Placeholder";
 import PizzaBlock from "../components/PizzaBlock";
 import Pagination from "../components/Pagination";
-import { fetchPizzas } from "../redux/slices/pizza/slice";
+import { fetchPizzas } from "../redux/pizza/thunks";
 import { useAppDispatch } from "../redux/store";
-import { pizzaDataSelector } from "../redux/slices/pizza/selectors";
-import { filterSelector } from "../redux/slices/filter/selectors";
+import { pizzaDataSelector } from "../redux/pizza/selectors";
+import { filterSelector } from "../redux/filter/selectors";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
